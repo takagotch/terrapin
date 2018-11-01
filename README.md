@@ -22,49 +22,41 @@ line = Terrapin::CommandLine.new("echo", "haha`whoami`")
 line.command
 line.run
 
-line = Terrapin::CommandLine.new("noisy", "--extra-verbose", swallow_stderr: true)
-line.command()
-line.run()
-
-line = Terrrapin::CommandLine.new()
+line = Terrrapin::CommandLine.new("noisy", "--extra-verbos", swallow_stderr: true)
+line.command
 line.command
 
-line = Terrapin::CommandLine.new()
+line = Terrapin::CommandLine.new("git", "commit")
 begin
-rescue
-end
-
-line = Terrapin::CommandLine.new(
-begin
+  line.run
 rescue Terrapin::ExitStatusError => e
+  e.message
 end
 
 line = Terrapin::CommandLIne.new()
 begin
+  line.run
 rescue Terrapin::CommandNotFoundError => e
+  e
 end
 
-Terrapin::CommandLine.path = ""
-line = Terrapin::CommandLine.new()
+Terrapin::CommandLine.path = "/opt/bin"
+line = Terrapin::CommandLine.new("lolwut")
 line.command
 
-FileUtils.rm()
-File.open() {}
-Terrapin::CommandLine.path = []
-line = Terrrapin::ComamndLine.new()
+FileUtils.rm("/opt/bin/lolwut")
+File.open('/usr/local/bin/lolwut') {|f| f.write('echo Hello') }
+Terrapin::CommandLine.path = ["/pot/bin", "/usr/local/bin"]
+line = Terrrapin::ComamndLine.new("lolwut")
 line.run
-
-line = Terrapin::CommandLine.new()
+line = Terrapin::CommandLine.new("/opt/bin/lolwut")
 line.command
 
-line = Terrapin::CommandLine.new()
-line.command
+line = Terrapin::CommandLine.new("echo", "var", logger: Logger.new(STDOUT))
+line.run(var: "LOL!")
 
-line = Terrapin::CommandLine.new()
-line.run()
-
-Terrapin::CommandLine.logger = Loger.new()
-Terrapin::CommandLine.new().run
+Terrapin::CommandLine.logger = Loger.new(STDOUT)
+Terrapin::CommandLine.new("date").run
 
 Terrapin::CommandLIne.runner = Terrapin::CommandLine::BackticksRunner.new
 

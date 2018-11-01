@@ -4,23 +4,25 @@ https://github.com/thoughtbot/terrapin
 
 
 ```ruby
-line = Terrapin::CommandLine.new()
+line = Terrapin::CommandLine.new("echo", "hello")
 line.command
 line.run
 
-line = Terrapin::CommandLine.new()
-line.command()
+line = Terrapin::CommandLine.new("convert", ":in -scale :resolution :out")
+line.command(in: "omg.jpg",
+             resolution: "32x32",
+             out: "omg_thumb.jpg")
 
-line = Terrapin::CommandLine.new()
-line.command()
-line = Terrapin::CommandLine.new()
-line.command()
+line = Terrapin::CommandLine.new("cat", ":file")
+line.command(file: "haha`rm -rf /`.txt")
+line = Terrapin::CommandLine.new("cat", ":file")
+line.command(file: "ohyeah?`rm -rf /`.ha!")
 
-line = Terrapin::CommandLine.new()
+line = Terrapin::CommandLine.new("echo", "haha`whoami`")
 line.command
 line.run
 
-line = Terrapin::CommandLine.new()
+line = Terrapin::CommandLine.new("noisy", "--extra-verbose", swallow_stderr: true)
 line.command()
 line.run()
 
